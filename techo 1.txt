@@ -1,0 +1,21 @@
+void setup()
+{
+lcd.begin(16,1); 
+attachInterrupt(0,isr,RISING);
+}
+
+void loop()
+{
+delay(1000);
+detachInterrupt(0); 
+time=millis()-oldtime;
+rpm=(rev/time)*60000*3;
+oldtime=millis(); 
+rev=0;
+lcd.clear();
+lcd.setCursor(0,1);
+lcd.print( rpm);
+lcd.print(" RPM");
+lcd.print(" ");
+attachInterrupt(0,isr,RISING);
+}
